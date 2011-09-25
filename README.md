@@ -23,3 +23,7 @@ irc.freenode.net #bbth
 
 ### Future
 - Convert bmps to pngs including alpha channel
+
+
+## Useful Links
+- http://th.corsix.org/docs/class_hierarchy.html
