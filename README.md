@@ -11,9 +11,11 @@ Available: http://t.co/ZQeYBnrf
 
 - Comment Src functions
 - Work out WTF it is doing
-- Convert lua to javascript
+- Comment src functions
 - Write tests
-- Add more to dos
+- Convert lua to javascript
+- Convert cpp to [another language?]
+- Add more to do items
 
 ### Future
 - Convert bmps to pngs including alpha channel
