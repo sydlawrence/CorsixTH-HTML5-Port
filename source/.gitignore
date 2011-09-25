@@ -1,0 +1,22 @@
+# These are from svn:ignore
+/DataRaw/
+/LuaJIT/
+/SDL/
+/SDL_mixer-1.2.8/
+config.txt
+CorsixTH/Src/config.h
+
+# This is for the CMake build output
+cmake_install.cmake
+*.build/
+CMakeScripts/
+CMakeFiles/
+CMakeCache.txt
+
+# This is for the CMake-generated XCode project and output
+/build/
+*.xcodeproj/
+Debug/
+Release/
+MinSizeRel/
+RelWithDebInfo/

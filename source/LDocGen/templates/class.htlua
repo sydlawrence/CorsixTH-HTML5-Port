@@ -1,0 +1,88 @@
+<h2 class="class"><!= class:getName() !> Class</h2>
+<! if class:getShortDesc() then !><h3 class="class"><!= class:getShortDesc() !></h3> <! end !>
+<div class="class_info">
+  <strong>Declared on:</strong> <!= src_ref(class) !>.
+  <! if class:getSuperClass() then !><br/><strong>Inheritance:</strong> <!= template "class_inheritance" {class = class} !> <! end !>
+  <! if class:hasSubclasses() then !><br/><strong>Subclasses:</strong><!
+    local s = " "
+    for name, subclass in class:subclassPairs() do
+      !><!= s !><a href="<!= subclass:getId() !>.html"><!= name !></a><!
+      s = ", "
+    end end !>
+  <! if class:getLongDesc() then !><br/><strong>Full description:</strong><br/> <!= class:getLongDesc() !> <! end !>
+</div>
+<div class="method_list">
+  <h4>Method Index</h4>
+  <! do local super = class:getSuperClass() !>
+    <ul>
+      <! for name, member in class:pairs() do !>
+        <! if member.type == "function" and name ~= member:getParent():getName() then !>
+          <li class="<!= member:getParent() == class and "self" or "inherited"!>">
+            <a href="<!= member:getParent():getId() !>.html#<!= member:getId() !>"><!= name !></a>(<!
+            local s = "" for name, param in member:parameterPairs() do
+              !><!= s !><span class="p"><!= name !></span><! s = ", " !><!
+            end !>)
+            <! if member:getParent() ~= class then !>
+              (inherited from <a href="<!= member:getParent():getId() !>.html"><!= member:getParent():getName() !></a>)
+            <! elseif super and super:get(name) then local existing = super:get(name)!>
+              (overrides <a href="<!= existing:getParent():getId() !>.html#<!= existing:getId() !>"><!= existing:getParent():getName() !><!= member:isMethod() and ":" or "." !><!= name !></a>)
+            <! end !>
+          </li>
+        <! end !>
+      <! end !>
+    </ul>
+  <! end !>
+</div>
+<div class="member_list">
+  <h4>Member Index</h4>
+  <ul>
+    <! local any_super = false; for name, member in class:pairs() do !>
+      <! if member.type ~= "function" then !>
+        <li><span class="p"><!= name !></span>
+          <! if member:getParent() ~= class then any_super = true !>
+            (*)
+          <! end !>
+        </li>
+      <! end !>
+    <! end !>
+  </ul>
+  <! if any_super then !>
+    (*) only used in superclass methods
+  <! end !>
+</div>
+<div class="methods">
+  <! local super = class:getSuperClass() !>
+  <! for name, member in class:pairs() do !>
+    <! if member.type == "function" and member:getParent() == class then !>
+      <div class="method">
+        <h5><a name="<!= member:getId() !>">function <!= class:getName() .. (member:isMethod() and ":" or ".") .. name !>(<!
+          local s = ""; for name, param in member:parameterPairs() do
+            !><!= s !><span class="p"><!= name !></span><! s = ", " !><!
+          end
+        !>)</a></h5>
+        <p>
+          <! if member:getShortDesc() then !><!= member:getShortDesc() !><br/><br/><! end !>
+          <! if member:getLongDesc() then !><!= member:getLongDesc() !><br/><br/><! end !>
+          <! if not isIteratorEmpty(member:parameterPairs()) then !>
+            <strong>Parameters:</strong>
+            <table class="params">
+              <tr><th class="n">Name</th><th class="t">Type</th><th>Description</th>
+              <! for name, param in member:parameterPairs() do !>
+                <tr>
+                  <td class="n"><!= name !></td>
+                  <td class="t"><!= param and param.type and param.type[1] and table.concat(param.type, "&nbsp;or&nbsp;") or "?" !></td>
+                  <td class="d"><!= (param and param:getLongDesc()) or (param and param:getShortDesc()) or "?" !></td>
+                </tr>
+              <! end !>
+            </table></p><p>
+          <! end !>
+          <! if super and super:get(name) then local existing = super:get(name) !>
+            <strong>Overrides:</strong> <a href="<!= existing:getParent():getId() !>.html#<!= existing:getId() !>"><!= existing:getParent():getName() !><!= member:isMethod() and ":" or "." !><!= name !></a>.<br/>
+          <! end !>
+          <strong>Declared on:</strong> <!= src_ref(member) !>.
+          <! if not member:isMethod() then !><br/><strong>Note:</strong> Is a function rather than a method. <! end !>
+        </p>
+      </div>
+    <! end !>
+  <! end !>
+</div>
