@@ -6,9 +6,13 @@ https://code.google.com/p/corsix-th/
 Requires the Theme Hospital Demo
 Available: http://t.co/ZQeYBnrf
 
+IRC: 
+irc.freenode.net #bbth
+
 
 ## To Do
 
+- Draw a class diagram
 - Comment Src functions
 - Work out WTF it is doing
 - Comment src functions
